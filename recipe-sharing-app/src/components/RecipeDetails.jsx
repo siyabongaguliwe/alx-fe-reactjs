@@ -1,16 +1,13 @@
-import React from 'react';
-import useRecipeStore from '../recipeStore';
+import { create } from 'zustand';
 
-const RecipeDetails = ({ recipeId }) => {
-  const recipe = useRecipeStore(state => state.recipes.find(recipe => recipe.id === recipeId));
+const useRecipeStore = create(set => ({
+  recipes: [],
+  addRecipe: (newRecipe) => set(state => ({ recipes: [...state.recipes, newRecipe] })),
+  deleteRecipe: (recipeId) => set(state => ({ recipes: state.recipes.filter(recipe => recipe.id !== recipeId) })),
+  updateRecipe: (updatedRecipe) => set(state => ({
+    recipes: state.recipes.map(recipe => recipe.id === updatedRecipe.id ? updatedRecipe : recipe)
+  })),
+  setRecipes: (recipes) => set({ recipes })
+}));
 
-  return (
-    <div>
-      <h1>{recipe.title}</h1>
-      <p>{recipe.description}</p>
-      {/* Render EditRecipeForm and DeleteRecipeButton here */}
-    </div>
-  );
-};
-
-export default RecipeDetails;
+export default useRecipeStore;
