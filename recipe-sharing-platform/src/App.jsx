@@ -1,29 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomePage from './components/HomePage';
+import RecipeDetail from './components/RecipeDetail';
 
-function HomePage() {
-  const [recipes, setRecipes] = useState([]);
-
-  useEffect(() => {
-    fetch('/data.json') // Ensure this path is correct
-      .then(response => response.json())
-      .then(data => setRecipes(data))
-      .catch(error => console.error('Error fetching data:', error));
-  }, []);
-
+function App() {
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Recipe Sharing Platform</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {recipes.map(recipe => (
-          <div key={recipe.id} className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-            <img src={recipe.image} alt={recipe.title} className="w-full h-48 object-cover rounded-t-lg" />
-            <h2 className="text-xl font-semibold mt-2">{recipe.title}</h2>
-            <p className="text-gray-600">{recipe.summary}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/recipe/:id" element={<RecipeDetail />} />
+      </Routes>
+    </Router>
   );
 }
 
-export default HomePage;
+export default App;
