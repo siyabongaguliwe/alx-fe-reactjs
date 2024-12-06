@@ -8,9 +8,9 @@ export default {
     extend: {},
   },
   darkMode: 'class', // Enable dark mode using the 'class' strategy
+  purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"], // Add purge option
   variants: {
     extend: {},
   },
   plugins: [],
 }
-
