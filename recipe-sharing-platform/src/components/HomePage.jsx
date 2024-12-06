@@ -4,7 +4,7 @@ function HomePage() {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    fetch('/data.json') // Ensure this path is correct
+    fetch('/data.json')
       .then(response => response.json())
       .then(data => setRecipes(data))
       .catch(error => console.error('Error fetching data:', error));
