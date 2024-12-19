@@ -21,8 +21,8 @@ describe('fetchUserData', () => {
 
   it('should throw an error if user is not found', async () => {
     const username = 'unknownuser';
-    axios.get.mockRejectedValue(new Error('User not found'));
+    axios.get.mockRejectedValue(new Error('Looks like we cant find the user'));
 
-    await expect(fetchUserData(username)).rejects.toThrow('User not found');
+    await expect(fetchUserData(username)).rejects.toThrow('Looks like we cant find the user');
   });
 });
